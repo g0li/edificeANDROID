@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_residents"
+            android:icon="@drawable/ic_residents"
+            android:title="Residents" />
+        <item
+            android:id="@+id/nav_notice"
+            android:icon="@drawable/ic_notice"
+            android:title="Notice" />
+        <item
+            android:id="@+id/nav_maintenaince"
+            android:icon="@drawable/ic_maintenaince"
+            android:title="Maintenance" />
+        <item
+            android:id="@+id/nav_complaints"
+            android:icon="@drawable/ic_complaints"
+            android:title="Complaints" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@drawable/ic_log_out"
+            android:title="Log out" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share and Earn" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Contact Team" />
+        </menu>
+    </item>
+
+</menu>

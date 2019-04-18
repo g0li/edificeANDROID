@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "38030819540",
+    "firebase_url": "https://edifice-5a9a1.firebaseio.com",
+    "project_id": "edifice-5a9a1",
+    "storage_bucket": "edifice-5a9a1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38030819540:android:9450b912716429ba",
+        "android_client_info": {
+          "package_name": "com.lilliemountain.edifice"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "38030819540-7p576bft9k2g1occij8dakksmrsd2779.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lilliemountain.edifice",
+            "certificate_hash": "8fc105cc8cb30efa7ddec0bf9935b3c4de735e64"
+          }
+        },
+        {
+          "client_id": "38030819540-4to63p87d77lavk93j7ti70dq4j1p4tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKq7vxhvcH-Hx7oHBfBZ3aGisTwvKlWio"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38030819540-4to63p87d77lavk93j7ti70dq4j1p4tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

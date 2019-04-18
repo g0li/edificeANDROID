@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Edifice</string>
+    <string name="hint_email">Enter Email</string>
+    <string name="hint_password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="instance">demo-edifice</string>
+    <string name="admin_password">123456</string>
+    <string name="admin_email">test@test.com</string>
+    <string name="title_activity_user">Edifice</string>
+    <string name="title_home">Notices</string>
+    <string name="title_dashboard">Maintenance</string>
+    <string name="title_notifications">Complaints</string>
+    <string name="share_text">
+        Offers you simple and easy platform to manage your society.\n
+1.Maintain Society Accountancy.\n
+2.Generate Member Bills in single Click.\n
+3.Track Member Outstanding, interest etc.\n
+4.Track Assets and liabilities.\n
+5.Maintain Receipts ,Income ,Expenses.\n
+7.View and Publish Live All Society Notices.\n
+8.Data Management.\n
+9.Notices , Complaints ,Maintenance , Society Mangement.\n\n
+
+Call Us for Demo : +91 8169777677\n
+Email : roshan@lilliemountain.com\n
+website :https://www.lilliemountain.com/edifice.html
+    </string>
+</resources>
