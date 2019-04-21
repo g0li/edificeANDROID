@@ -48,7 +48,7 @@
         app:layout_constraintTop_toTopOf="@+id/greetings" />
 
     <TextView
-        android:id="@+id/amount"
+        android:id="@+id/description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/colorPrimary"
@@ -65,8 +65,8 @@
         android:layout_marginTop="8dp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/amount"
-        app:layout_constraintTop_toBottomOf="@+id/amount" />
+        app:layout_constraintStart_toStartOf="@+id/description"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/bills"

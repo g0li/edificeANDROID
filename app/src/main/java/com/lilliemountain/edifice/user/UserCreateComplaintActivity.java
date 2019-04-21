@@ -51,7 +51,7 @@ public class UserCreateComplaintActivity extends AppCompatActivity {
         complaintRef=instance.child("complaints");
         final String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
         userUID=complaintRef.child(uid);
-        complaint_type=instance.child("decider-types");
+        complaint_type=instance.child("complaint-types");
         users=instance.child("users");
         userUID2=users.child(uid);
         date.setKeyListener(null);
@@ -73,7 +73,6 @@ public class UserCreateComplaintActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 complaintTypeList.clear();
-                Log.e("onDataChange: ",dataSnapshot.getChildrenCount()+"L" );
                 GenericTypeIndicator<List<String>> t=new GenericTypeIndicator<List<String>>() {};
                 complaintTypeList.addAll(dataSnapshot.getValue(t));
                 ArrayAdapter<String> complaintStringArrayAdapter=new ArrayAdapter<>(UserCreateComplaintActivity.this,android.R.layout.simple_spinner_item,complaintTypeList);
@@ -90,7 +89,6 @@ public class UserCreateComplaintActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<List<Complaint>> t=new GenericTypeIndicator<List<Complaint>>() {};
                  complaintList=new ArrayList<>();
-                Log.e("onDataChangex: ",dataSnapshot.getChildrenCount()+"L" );
                 complaintList.addAll(dataSnapshot.getValue(t));
             }
 

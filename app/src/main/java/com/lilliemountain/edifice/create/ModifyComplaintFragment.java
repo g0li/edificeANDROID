@@ -92,7 +92,7 @@ public class ModifyComplaintFragment extends Fragment {
         stringList.add("Created");
         stringList.add("Solved");
         stringList.add("Not Solved");
-        stringArrayAdapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,stringList);
+        stringArrayAdapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringList);
         status.setAdapter(stringArrayAdapter);
 
         title.setText(mParam1.getTitle());

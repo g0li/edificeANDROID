@@ -113,7 +113,7 @@ public class CreateUserFragment extends Fragment {
         salutation=view.findViewById(R.id.salutation);
         housetype=view.findViewById(R.id.housetype);
         name=view.findViewById(R.id.name);
-        flat=view.findViewById(R.id.flat);
+        flat=view.findViewById(R.id.email);
         building=view.findViewById(R.id.building);
         carpetarea=view.findViewById(R.id.carpetarea);
         parkingslotno=view.findViewById(R.id.parkingslotno);
@@ -134,8 +134,8 @@ public class CreateUserFragment extends Fragment {
         club=view.findViewById(R.id.club);
         progressBar3=view.findViewById(R.id.progressBar3);
         progressBar3.setVisibility(View.GONE);
-        salAA=new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, sal);
-        htype=new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, ht);
+        salAA=new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, sal);
+        htype=new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, ht);
         salutation.setAdapter(salAA);
         housetype.setAdapter(htype);
         switch (mParam1)

@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".user.ProfileActivity"
-            android:parentActivityName=".UserActivity"/>
+        <activity android:name=".SignUpActivity"></activity>
+        <activity
+            android:name=".user.ProfileActivity"
+            android:parentActivityName=".UserActivity" />
         <activity
             android:name=".user.UserComplaintListActivity"
             android:parentActivityName=".UserActivity" />
@@ -35,6 +37,9 @@
             </intent-filter>
         </activity>
 
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -37,7 +37,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:spinnerMode="dialog"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -83,7 +83,7 @@
                     android:text="Flat" />
 
                 <EditText
-                    android:id="@+id/flat"
+                    android:id="@+id/email"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -218,7 +218,8 @@
             android:id="@+id/housetype"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:spinnerMode="dialog" />
 
     </LinearLayout>
         <LinearLayout

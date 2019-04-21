@@ -13,7 +13,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/particular"
+        android:id="@+id/resident"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -21,7 +21,7 @@
         android:textSize="18sp" />
 
     <TextView
-        android:id="@+id/amount"
+        android:id="@+id/description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1.5"

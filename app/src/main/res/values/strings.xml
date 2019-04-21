@@ -20,6 +20,7 @@
     <string name="title_home">Notices</string>
     <string name="title_dashboard">Maintenance</string>
     <string name="title_notifications">Complaints</string>
+    <string name="title_events">Events</string>
     <string name="share_text">
         Offers you simple and easy platform to manage your society.\n
 1.Maintain Society Accountancy.\n
@@ -35,4 +36,6 @@ Call Us for Demo : +91 8169777677\n
 Email : roshan@lilliemountain.com\n
 website :https://www.lilliemountain.com/edifice.html
     </string>
+    <string name="merchantId">154535973518150</string>
+    <string name="accessTokenTest">1C0258F916F4E553A9C673CF6F3D4493</string>
 </resources>

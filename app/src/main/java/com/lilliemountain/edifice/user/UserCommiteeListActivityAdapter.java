@@ -1,10 +1,6 @@
 package com.lilliemountain.edifice.user;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputEditText;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +12,6 @@ import com.lilliemountain.edifice.R;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.view.View.GONE;
 
 public class UserCommiteeListActivityAdapter extends RecyclerView.Adapter<UserCommiteeListActivityAdapter.UserHolder> {
     public UserCommiteeListActivityAdapter(List<Committee> list) {

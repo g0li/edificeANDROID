@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.lilliemountain.edifice.POJO.maintenance.Bill;
-import com.lilliemountain.edifice.POJO.maintenance.Maintenance;
 import com.lilliemountain.edifice.R;
 
 import java.util.ArrayList;
@@ -46,8 +45,8 @@ public class UserMaintenanceActivityAdapter extends RecyclerView.Adapter<UserMai
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             srno = itemView.findViewById(R.id.srno);
-            particular = itemView.findViewById(R.id.particular);
-            amount = itemView.findViewById(R.id.amount);
+            particular = itemView.findViewById(R.id.resident);
+            amount = itemView.findViewById(R.id.description);
         }
 
     }

@@ -135,7 +135,7 @@ public class CreateNoticeFragment extends Fragment {
         noticetype.add("AGM");
         noticetype.add("MEETING");
         noticetype.add("COMPLAINT");
-        noticeAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,noticetype);
+        noticeAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,noticetype);
         type.setAdapter(noticeAA);
         FirebaseDatabase database=FirebaseDatabase.getInstance();
         instance=database.getReference(getString(R.string.instance));

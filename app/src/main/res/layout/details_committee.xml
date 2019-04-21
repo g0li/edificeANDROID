@@ -13,31 +13,68 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <TextView
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:text="Resident Name"
-                android:textColor="#000"
-                app:fontFamily="@font/montserrat" />
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/name"
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:text="User Name"
+                    android:textColor="#000"
+                    app:fontFamily="@font/montserrat" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/montserrat" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="2dp"
+                android:layout_margin="3dp"
                 android:layout_weight="1"
-                android:textColor="#000"
-                android:textSize="18sp"
-                app:fontFamily="@font/montserrat" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:text="Email"
+                    android:textColor="#000"
+                    app:fontFamily="@font/montserrat" />
+
+                <TextView
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    app:fontFamily="@font/montserrat" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -49,7 +86,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="3dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -73,6 +110,7 @@
                     android:textSize="18sp"
                     app:fontFamily="@font/montserrat" />
             </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,43 +138,7 @@
                     android:textSize="18sp"
                     app:fontFamily="@font/montserrat" />
             </LinearLayout>
-
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="3dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="3dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:text="Date"
-                    android:textColor="#000"
-                    app:fontFamily="@font/montserrat" />
-
-                <TextView
-                    android:id="@+id/date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="2dp"
-                    android:layout_weight="1"
-                    android:textColor="#000"
-                    android:textSize="18sp"
-                    app:fontFamily="@font/montserrat" />
-            </LinearLayout>
-
 
 
         <LinearLayout
@@ -151,30 +153,40 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:text="Total Bill"
+                android:text="Role"
                 android:textColor="#000"
                 app:fontFamily="@font/montserrat" />
 
-            <TextView
-                android:id="@+id/totalbill"
+            <Spinner
+                android:id="@+id/role"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
-                android:layout_weight="1"
-                android:textColor="#000"
-                android:textSize="18sp"
-                app:fontFamily="@font/montserrat" />
-        </LinearLayout>
+                android:layout_weight="1"/>
         </LinearLayout>
 
-        <Button
-            android:id="@+id/details"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="2dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Details" />
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/close"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="close" />
+
+            <Button
+                android:id="@+id/save"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Save" />
+        </LinearLayout>
 
     </LinearLayout>
 </android.support.design.card.MaterialCardView>

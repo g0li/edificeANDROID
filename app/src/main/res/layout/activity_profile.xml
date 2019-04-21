@@ -73,7 +73,7 @@
                         android:textStyle="bold" />
 
                     <EditText
-                        android:id="@+id/flat"
+                        android:id="@+id/email"
                         style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

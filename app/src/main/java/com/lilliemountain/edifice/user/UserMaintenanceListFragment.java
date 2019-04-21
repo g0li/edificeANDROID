@@ -88,7 +88,7 @@ public class UserMaintenanceListFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_user_maintenance_list, container, false);
         greetings=view.findViewById(R.id.greetings);
         nextbill=view.findViewById(R.id.nextbill);
-        amount=view.findViewById(R.id.amount);
+        amount=view.findViewById(R.id.description);
         recyclerView=view.findViewById(R.id.bills);
         database=FirebaseDatabase.getInstance();
         instance=database.getReference(getString(R.string.instance));
@@ -108,6 +108,7 @@ public class UserMaintenanceListFragment extends Fragment {
                         user.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                list.clear();
                                 GenericTypeIndicator<List<Maintenance>> t=new GenericTypeIndicator<List<Maintenance>>() {};
                                 list.addAll(dataSnapshot.getValue(t));
                                 nextbill.setText("next bill is due "+list.get(list.size()-1).getHeader().getDate());

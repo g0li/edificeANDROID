@@ -16,7 +16,6 @@ public class Maintenance implements Parcelable {
     private String status;
     private long subtotal;
     private long totalbill;
-
     /**
      * No args constructor for use in serialization
      * 
@@ -25,7 +24,7 @@ public class Maintenance implements Parcelable {
     }
 
     /**
-     * 
+     *
      * @param id
      * @param payable
      * @param bill

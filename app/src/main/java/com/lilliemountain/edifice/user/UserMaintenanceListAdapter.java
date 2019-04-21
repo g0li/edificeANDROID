@@ -19,7 +19,7 @@ public class UserMaintenanceListAdapter extends RecyclerView.Adapter<UserMainten
         this.list = list;
     }
 
-    List<Maintenance> list = new ArrayList<>();
+    List<Maintenance> list ;
 
     @NonNull
     @Override

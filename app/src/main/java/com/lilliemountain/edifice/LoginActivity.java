@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.SpinKitView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.lilliemountain.edifice.POJO.Committee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference instance,admins;
+    SpinKitView spin_kit;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,34 +41,39 @@ public class LoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         fieldEmail=findViewById(R.id.fieldEmail);
         fieldPassword=findViewById(R.id.fieldPassword);
+        spin_kit=findViewById(R.id.spin_kit);
         findViewById(R.id.emailSignInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spin_kit.setVisibility(View.VISIBLE);
+                findViewById(R.id.emailSignInButton).setClickable(false);
                 mAuth.signInWithEmailAndPassword(fieldEmail.getText().toString(), fieldPassword.getText().toString())
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "signInWithEmail:success");
                                     final FirebaseUser user = mAuth.getCurrentUser();
                                     if(user!=null)
                                     {
 
                                         database=FirebaseDatabase.getInstance();
                                         instance=database.getReference(getString(R.string.instance));
-                                        admins=instance.child("admins");
+                                        admins=instance.child("committee");
                                         admins.addValueEventListener(new ValueEventListener() {
                                             @Override
                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                                 for (DataSnapshot dataSnapshot1:
                                                         dataSnapshot.getChildren()) {
-                                                if(dataSnapshot1.getValue().toString().toLowerCase().equals(user.getEmail().toLowerCase())){
+                                                    Committee committee=dataSnapshot1.getValue(Committee.class);
+                                                    spin_kit.setVisibility(View.GONE);
+                                                    findViewById(R.id.emailSignInButton).setClickable(true);
+                                                    if(committee.getEmail().toLowerCase().equals(user.getEmail().toLowerCase())){
                                                     startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
-                                                }
-                                                else {
+                                                    }
+                                                    else {
                                                     startActivity(new Intent(LoginActivity.this, UserActivity.class));
-                                                }
+                                                    }
                                                 }
                                             }
 
@@ -78,7 +86,6 @@ public class LoginActivity extends AppCompatActivity {
 
                                 } else {
                                     // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
                                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
 
@@ -97,16 +104,20 @@ public class LoginActivity extends AppCompatActivity {
          currentUser = mAuth.getCurrentUser();
         if(currentUser!=null)
         {
-
+            findViewById(R.id.emailSignInButton).setClickable(false);
+            spin_kit.setVisibility(View.VISIBLE);
             database=FirebaseDatabase.getInstance();
             instance=database.getReference(getString(R.string.instance));
-            admins=instance.child("admins");
+            admins=instance.child("committee");
             admins.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     for (DataSnapshot dataSnapshot1:
                             dataSnapshot.getChildren()) {
-                        if(dataSnapshot1.getValue().toString().toLowerCase().equals(currentUser.getEmail().toLowerCase())){
+                        Committee committee=dataSnapshot1.getValue(Committee.class);
+                        spin_kit.setVisibility(View.GONE);
+
+                        if(committee.getEmail().toLowerCase().equals(currentUser.getEmail().toLowerCase())){
                             startActivity(new Intent(LoginActivity.this, DashboardActivity.class));
                         }
                         else {

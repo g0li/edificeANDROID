@@ -13,6 +13,18 @@ public class Header  implements Parcelable {
     private String flat;
     private String housetype;
     private String resident;
+    private String phoneno;
+
+    public Header(String billfor, String building, Integer carpetarea, String date, String flat, String housetype, String resident, String phoneno) {
+        this.billfor = billfor;
+        this.building = building;
+        this.carpetarea = carpetarea;
+        this.date = date;
+        this.flat = flat;
+        this.housetype = housetype;
+        this.resident = resident;
+        this.phoneno = phoneno;
+    }
 
     /**
      * No args constructor for use in serialization
@@ -21,26 +33,6 @@ public class Header  implements Parcelable {
     public Header() {
     }
 
-    /**
-     * 
-     * @param billfor
-     * @param housetype
-     * @param building
-     * @param flat
-     * @param carpetarea
-     * @param date
-     * @param resident
-     */
-    public Header(String billfor, String building, Integer carpetarea, String date, String flat, String housetype, String resident) {
-        super();
-        this.billfor = billfor;
-        this.building = building;
-        this.carpetarea = carpetarea;
-        this.date = date;
-        this.flat = flat;
-        this.housetype = housetype;
-        this.resident = resident;
-    }
 
     protected Header(Parcel in) {
         billfor = in.readString();
@@ -54,6 +46,7 @@ public class Header  implements Parcelable {
         flat = in.readString();
         housetype = in.readString();
         resident = in.readString();
+        phoneno = in.readString();
     }
 
     public static final Creator<Header> CREATOR = new Creator<Header>() {
@@ -79,6 +72,7 @@ public class Header  implements Parcelable {
     public String getBuilding() {
         return building;
     }
+
 
     public void setBuilding(String building) {
         this.building = building;
@@ -143,5 +137,14 @@ public class Header  implements Parcelable {
         dest.writeString(flat);
         dest.writeString(housetype);
         dest.writeString(resident);
+        dest.writeString(phoneno);
+    }
+
+    public String getPhoneno() {
+        return phoneno;
+    }
+
+    public void setPhoneno(String phoneno) {
+        this.phoneno = phoneno;
     }
 }

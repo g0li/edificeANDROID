@@ -52,7 +52,7 @@ public class MaintenanceBillAdapter extends RecyclerView.Adapter<MaintenanceBill
         public MaintenanceBillHolder(@NonNull View itemView) {
             super(itemView);
             amount = itemView.findViewById(R.id.pamount);
-            particular = itemView.findViewById(R.id.particular);
+            particular = itemView.findViewById(R.id.resident);
             srno = itemView.findViewById(R.id.srno);
             pam = itemView.findViewById(R.id.pam);
             pa = itemView.findViewById(R.id.pa);

@@ -8,8 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.lilliemountain.edifice.LoginActivity;
 import com.lilliemountain.edifice.POJO.Users;
 import com.lilliemountain.edifice.R;
-import com.lilliemountain.edifice.UserActivity;
 
 public class ProfileActivity extends AppCompatActivity {
     EditText name,flat,building,extrafeatures,parking,parkingslotno,vehiclemodel,twfourwheeler,emailid,mobileno,landline;
@@ -34,7 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         name=findViewById(R.id.name);
-        flat=findViewById(R.id.flat);
+        flat=findViewById(R.id.email);
         building=findViewById(R.id.building);
         extrafeatures=findViewById(R.id.extrafeatures);
         parking=findViewById(R.id.parking);

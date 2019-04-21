@@ -99,7 +99,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>  i
         public UserHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.name);
-            flat=itemView.findViewById(R.id.flat);
+            flat=itemView.findViewById(R.id.email);
             building=itemView.findViewById(R.id.building);
             itemView.findViewById(R.id.details).setOnClickListener(new View.OnClickListener() {
                 @Override

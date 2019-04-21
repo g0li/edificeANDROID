@@ -14,12 +14,14 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.lilliemountain.edifice.user.ProfileActivity;
 import com.lilliemountain.edifice.user.UserComplaintFragment;
+import com.lilliemountain.edifice.user.UserEventsFragment;
 import com.lilliemountain.edifice.user.UserMaintenanceListFragment;
 import com.lilliemountain.edifice.user.UserNoticeListFragment;
 
 public class UserActivity extends AppCompatActivity implements UserNoticeListFragment.OnFragmentInteractionListener ,
         UserMaintenanceListFragment.OnFragmentInteractionListener,
-        UserComplaintFragment.OnFragmentInteractionListener {
+        UserComplaintFragment.OnFragmentInteractionListener ,
+        UserEventsFragment.OnFragmentInteractionListener {
 
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -39,6 +41,10 @@ public class UserActivity extends AppCompatActivity implements UserNoticeListFra
                 case R.id.navigation_notifications:
                     getSupportActionBar().setTitle("Complaint");
                     openFragment(UserComplaintFragment.newInstance("",""));
+                    return true;
+                case R.id.navigation_events:
+                    getSupportActionBar().setTitle("Events");
+                    openFragment(UserEventsFragment.newInstance("",""));
                     return true;
             }
             return false;

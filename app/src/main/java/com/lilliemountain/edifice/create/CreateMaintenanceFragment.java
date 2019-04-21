@@ -36,7 +36,6 @@ import com.lilliemountain.edifice.POJO.maintenance.Maintenance;
 import com.lilliemountain.edifice.POJO.maintenance.Particulars;
 import com.lilliemountain.edifice.R;
 import com.lilliemountain.edifice.adapters.MaintenanceBillAdapter;
-import com.lilliemountain.edifice.list.ResidentListFragment;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -123,7 +122,7 @@ public class CreateMaintenanceFragment extends Fragment {
         totalbill=view.findViewById(R.id.totalbill);
         building=view.findViewById(R.id.building);
         carpetarea=view.findViewById(R.id.carpetarea);
-        flat=view.findViewById(R.id.flat);
+        flat=view.findViewById(R.id.email);
         housetype=view.findViewById(R.id.housetype);
         date=view.findViewById(R.id.billDate);
         billfor=view.findViewById(R.id.billforSpinner);
@@ -163,7 +162,7 @@ public class CreateMaintenanceFragment extends Fragment {
                     namesOfResidents.add(u.getName());
                     namesOfResidentsKey.add(child.getKey());
                 }
-                namesAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,namesOfResidents);
+                namesAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,namesOfResidents);
                 resident.setAdapter(namesAA);
                 resident.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
@@ -188,7 +187,7 @@ public class CreateMaintenanceFragment extends Fragment {
                              particularsList) {
                             particularsListStr.add(particular.getName());
                         }
-                        particularAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,particularsListStr);
+                        particularAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,particularsListStr);
                         particulars.setAdapter(particularAA);
                         particulars.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
@@ -207,7 +206,7 @@ public class CreateMaintenanceFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 GenericTypeIndicator<List<String>> t = new GenericTypeIndicator<List<String>>() {};
                                 billForList=dataSnapshot.getValue(t);
-                                billsAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_spinner_item,billForList);
+                                billsAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,billForList);
                                 billfor.setAdapter(billsAA);
                                 view.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -252,7 +251,7 @@ public class CreateMaintenanceFragment extends Fragment {
                 Maintenance _maintenance=new Maintenance();
                 Users users=namesOfResidentsUsers.get(resident.getSelectedItemPosition());
 
-                header=new Header(billForList.get(billfor.getSelectedItemPosition()), users.getBuilding(),users.getCarpetarea(),dateStr,users.getFlat(),users.getFlat(),users.getName());
+                header=new Header(billForList.get(billfor.getSelectedItemPosition()), users.getBuilding(),users.getCarpetarea(),dateStr,users.getFlat(),users.getFlat(),users.getName(),users.getMobile());
                 _maintenance=new Maintenance(mbalist,header,header.getBillfor()+dateStr.split("-")[2],0,0,"Created",subTotal,subTotal);
                 maintenance.child(namesOfResidentsKey.get(resident.getSelectedItemPosition())).addValueEventListener(new ValueEventListener() {
                     @Override

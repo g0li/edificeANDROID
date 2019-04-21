@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -16,8 +15,6 @@ import android.widget.TextView;
 import com.lilliemountain.edifice.POJO.maintenance.Bill;
 import com.lilliemountain.edifice.POJO.maintenance.Maintenance;
 import com.lilliemountain.edifice.R;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +88,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
             super(itemView);
             name=itemView.findViewById(R.id.name);
             building=itemView.findViewById(R.id.building);
-            flat=itemView.findViewById(R.id.flat);
+            flat=itemView.findViewById(R.id.email);
             totalbill=itemView.findViewById(R.id.totalbill);
             date=itemView.findViewById(R.id.date);
             itemView.findViewById(R.id.details).setOnClickListener(new View.OnClickListener() {
@@ -117,7 +114,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
         billfor=dialog.findViewById(R.id.billfor);
         carpetarea=dialog.findViewById(R.id.carpetarea);
         date=dialog.findViewById(R.id.date);
-        flat=dialog.findViewById(R.id.flat);
+        flat=dialog.findViewById(R.id.email);
         housetype=dialog.findViewById(R.id.housetype);
         resident=dialog.findViewById(R.id.resident);
         pending=dialog.findViewById(R.id.pending);
