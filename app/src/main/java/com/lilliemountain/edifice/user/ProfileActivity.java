@@ -1,6 +1,7 @@
 package com.lilliemountain.edifice.user;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -31,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         name=findViewById(R.id.name);
-        flat=findViewById(R.id.email);
+        flat=findViewById(R.id.flat);
         building=findViewById(R.id.building);
         extrafeatures=findViewById(R.id.extrafeatures);
         parking=findViewById(R.id.parking);
@@ -100,6 +101,12 @@ public class ProfileActivity extends AppCompatActivity {
             case R.id.profile:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
+                return true;
+            case R.id.developer:
+                String url = "https://www.lilliemountain.com/";
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
                 return true;
             case R.id.share:
                 String shareBody = getString(R.string.share_text);

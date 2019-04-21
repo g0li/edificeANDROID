@@ -23,8 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lilliemountain.edifice.POJO.Committee;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     private  String TAG = LoginActivity.class.getSimpleName();
@@ -42,6 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         fieldEmail=findViewById(R.id.fieldEmail);
         fieldPassword=findViewById(R.id.fieldPassword);
         spin_kit=findViewById(R.id.spin_kit);
+//        findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+//            }
+//        });
         findViewById(R.id.emailSignInButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

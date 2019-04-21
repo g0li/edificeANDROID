@@ -82,6 +82,15 @@
                 android:layout_weight="1"
                 android:text="@string/sign_in"/>
 
+            <Button
+                android:id="@+id/register"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Register to Edifice"
+                android:visibility="gone" />
+
         </LinearLayout>
 
     </LinearLayout>

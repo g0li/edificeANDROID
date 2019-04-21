@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -131,8 +131,8 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="Going :"
-        android:textOff="@android:string/yes"
-        android:textOn="@android:string/no" />
+        android:textOff="Yes"
+        android:textOn="No" />
 
     <TextView
         android:id="@+id/goingppl"
@@ -150,4 +150,4 @@
         android:text="Guest List" />
 
 </LinearLayout>
-</android.support.design.card.MaterialCardView>
+</android.support.v7.widget.CardView>
