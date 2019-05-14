@@ -98,7 +98,7 @@ public class CommitteeAdapter extends RecyclerView.Adapter<CommitteeAdapter.User
             super(itemView);
             username=itemView.findViewById(R.id.username);
             building=itemView.findViewById(R.id.building);
-            flat=itemView.findViewById(R.id.email);
+            flat=itemView.findViewById(R.id.flat);
             email=itemView.findViewById(R.id.email);
             role=itemView.findViewById(R.id.role);
             itemView.findViewById(R.id.remove).setOnClickListener(new View.OnClickListener() {

@@ -3,113 +3,106 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     android:background="#00112233"
-    android:gravity="center"
     android:orientation="vertical"
     android:padding="5dp">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hi, how can I help you today?"
+        android:textColor="#000"
+        android:textSize="30sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="vertical"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Hi, how can I help you today?"
-            android:textColor="#000"
-            android:textSize="18sp" />
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:padding="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="2dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="Email"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="Email"
-                    android:textColor="#000"
-                    app:fontFamily="@font/montserrat" />
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:autoLink="email"
-                    android:text="iprogramyourapp@gmail.com"
-                    android:textColor="#000"
-                    app:fontFamily="@font/montserrat" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/email"
+            <TextView
+                android:id="@+id/title"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_email" />
-
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoLink="email"
+                android:text="roshan@lilliemountain.com"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:fontFamily="@font/montserrat" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_email" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:orientation="horizontal"
+        android:padding="2dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="2dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="2dp">
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:text="WhatsApp"
+                android:textColor="#000"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/montserrat" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="WhatsApp"
-                    android:textColor="#000"
-                    app:fontFamily="@font/montserrat" />
-
-                <TextView
-                    android:id="@+id/desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:autoLink="phone"
-                    android:text="+918169777677"
-                    android:textColor="#000"
-                    app:fontFamily="@font/montserrat" />
-            </LinearLayout>
-
-            <ImageView
-                android:id="@+id/whatsapp"
+            <TextView
+                android:id="@+id/desc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:scaleType="centerInside"
-                android:src="@drawable/ic_whatsapp" />
-
+                android:layout_weight="1"
+                android:autoLink="phone"
+                android:text="+918169919851"
+                android:textColor="#000"
+                android:textSize="16sp"
+                app:fontFamily="@font/montserrat" />
         </LinearLayout>
 
+        <ImageView
+            android:id="@+id/whatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_whatsapp" />
 
     </LinearLayout>
 

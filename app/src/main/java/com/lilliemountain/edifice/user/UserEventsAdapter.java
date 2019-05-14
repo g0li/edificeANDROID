@@ -27,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserEventsAdapter extends RecyclerView.Adapter<UserEventsAdapter.UserEventsHolder> {
-    public UserEventsAdapter(List<Events> list, OnGoingListener onGoingListener) {
+    public UserEventsAdapter(List<Events> list, OnUserEventListener onUserEventListener) {
         this.list = list;
-        this.onGoingListener = onGoingListener;
+        this.onUserEventListener = onUserEventListener;
     }
-    OnGoingListener onGoingListener;
+    OnUserEventListener onUserEventListener;
     List<Events> list = new ArrayList<>();
 
     @NonNull
@@ -73,7 +73,16 @@ public class UserEventsAdapter extends RecyclerView.Adapter<UserEventsAdapter.Us
         complaintHolder.aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                onGoingListener.onGoing(isChecked,i);
+                onUserEventListener.onGoing(isChecked,i);
+            }
+        });
+        complaintHolder.closestatus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (list.get(i).getStatus().equals("Created"))
+                onUserEventListener.onStatusChanged("Closed",i);
+                else
+                onUserEventListener.onStatusChanged("Created",i);
             }
         });
         complaintHolder.goingppl.setText(list.get(i).getGuests().size()+" people going for this event.");
@@ -83,13 +92,16 @@ public class UserEventsAdapter extends RecyclerView.Adapter<UserEventsAdapter.Us
     public int getItemCount() {
         return list.size();
     }
-    interface OnGoingListener {
+    interface OnUserEventListener
+    {
      void onGoing(boolean b,int position);
+     void onStatusChanged(String b,int position);
     }
     public class UserEventsHolder extends RecyclerView.ViewHolder {
         TextView resident,title,description,flat,date,goingppl;
         Switch aSwitch;
         Button guestlist;
+        Button closestatus;
         public UserEventsHolder(@NonNull View itemView) {
             super(itemView);
             resident = itemView.findViewById(R.id.resident);
@@ -100,6 +112,7 @@ public class UserEventsAdapter extends RecyclerView.Adapter<UserEventsAdapter.Us
             goingppl = itemView.findViewById(R.id.goingppl);
             aSwitch=itemView.findViewById(R.id.going);
             guestlist=itemView.findViewById(R.id.guestlist);
+            closestatus=itemView.findViewById(R.id.closestatus);
         }
     }
     public void showGuestList(final View view, final List<String> dataSourcxe){

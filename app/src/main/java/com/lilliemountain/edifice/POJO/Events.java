@@ -14,6 +14,7 @@ public class Events {
     private String building;
     private String date;
     private String email;
+    private String status;
     private List<String> guests=new ArrayList<>();
 
     /**
@@ -34,9 +35,10 @@ public class Events {
      * @param comments
      * @param email
      * @param guests
+     * @param status
      */
 
-    public Events(String residentName, String title, String description, String flat, String comments, String building, String date, String email, List<String> guests) {
+    public Events(String residentName, String title, String description, String flat, String comments, String building, String date, String email, List<String> guests,String status) {
         this.residentName = residentName;
         this.title = title;
         this.description = description;
@@ -46,8 +48,18 @@ public class Events {
         this.date = date;
         this.email = email;
         this.guests = guests;
+        this.status = status;
     }
 
+
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 
     public List<String> getGuests() {

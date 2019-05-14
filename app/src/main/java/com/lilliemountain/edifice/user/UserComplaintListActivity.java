@@ -36,14 +36,14 @@ public class UserComplaintListActivity extends AppCompatActivity {
 
         String id=getIntent().getStringExtra("id");
         switch (id){
-            case"committee":
+            case"localservices":
                 setTitle("Society Committee Members");
                 String em2= FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 getSupportActionBar().setSubtitle("e :"+em2);
 
                 database=FirebaseDatabase.getInstance();
                 instance=database.getReference(getString(R.string.instance));
-                decider =instance.child("committee");
+                decider =instance.child("localservices");
                 decider.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -77,7 +77,10 @@ public class UserComplaintListActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         GenericTypeIndicator<List<Complaint>> t=new GenericTypeIndicator<List<Complaint>>() {};
                         complaintList.clear();
-                        complaintList.addAll(dataSnapshot.getValue(t));
+                        try {
+                            complaintList.addAll(dataSnapshot.getValue(t));
+                        } catch (Exception e) {
+                        }
                         uCLAAdapter=new UserComplainListActivityAdapter(complaintList);
                         recyclerView.setAdapter(uCLAAdapter);
                     }

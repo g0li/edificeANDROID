@@ -129,7 +129,7 @@
                     app:fontFamily="@font/montserrat" />
 
                 <TextView
-                    android:id="@+id/email"
+                    android:id="@+id/flat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="2dp"

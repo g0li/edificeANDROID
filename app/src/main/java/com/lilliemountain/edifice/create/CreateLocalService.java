@@ -5,49 +5,46 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.lilliemountain.edifice.POJO.Complaint;
+import com.lilliemountain.edifice.DashboardActivity;
+import com.lilliemountain.edifice.DashboardFragment;
+import com.lilliemountain.edifice.POJO.LocalServices;
 import com.lilliemountain.edifice.R;
-import com.lilliemountain.edifice.list.ComplaintListFragment;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.lilliemountain.edifice.list.LocalServicesListFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ModifyComplaintFragment.OnFragmentInteractionListener} interface
+ * {@link CreateLocalService.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ModifyComplaintFragment#newInstance} factory method to
+ * Use the {@link CreateLocalService#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ModifyComplaintFragment extends Fragment {
+public class CreateLocalService extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private Complaint mParam1;
+    private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public ModifyComplaintFragment() {
+    public CreateLocalService() {
         // Required empty public constructor
     }
 
@@ -57,76 +54,84 @@ public class ModifyComplaintFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment ModifyComplaintFragment.
+     * @return A new instance of fragment CreateLocalService.
      */
     // TODO: Rename and change types and number of parameters
-    public static ModifyComplaintFragment newInstance(Complaint param1, String param2) {
-        ModifyComplaintFragment fragment = new ModifyComplaintFragment();
+    public static CreateLocalService newInstance(String param1, String param2) {
+        CreateLocalService fragment = new CreateLocalService();
         Bundle args = new Bundle();
-        args.putParcelable(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getParcelable(ARG_PARAM1);
+            mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
-    TextView title,complainttext,date,type;
-    EditText admincomments;
-    Spinner status;
+    LocalServices localServices;
+    TextInputEditText workerName,workerNumber1,workerNumber2,workerCategory,workerOfficeAddress;
     FirebaseDatabase database;
-    List<String> stringList=new ArrayList<>();
-    DatabaseReference complaint,instance;
-    ArrayAdapter<String> stringArrayAdapter;
+    DatabaseReference localservices;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_modify_complaint, container, false);
-        title=view.findViewById(R.id.title);
-        complainttext=view.findViewById(R.id.desc);
-        date=view.findViewById(R.id.date);
-        type=view.findViewById(R.id.type);
-        admincomments=view.findViewById(R.id.admincomments);
-        status=view.findViewById(R.id.status);
+        final View view= inflater.inflate(R.layout.fragment_create_local, container, false);
+        workerName=view.findViewById(R.id.workerName);
+        workerNumber1=view.findViewById(R.id.workerNumber1);
+        workerNumber2=view.findViewById(R.id.workerNumber2);
+        workerCategory=view.findViewById(R.id.workerCategory);
+        workerOfficeAddress=view.findViewById(R.id.workerOfficeAddress);
+
         database=FirebaseDatabase.getInstance();
-        instance=database.getReference(getString(R.string.instance));
-        complaint=instance.child("complaints");
-        stringList.add("Created");
-        stringList.add("Solved");
-        stringList.add("Not Solved");
-        stringArrayAdapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,stringList);
-        status.setAdapter(stringArrayAdapter);
-
-        title.setText(mParam1.getTitle());
-        complainttext.setText(mParam1.getComplaint());
-        date.setText(mParam1.getDate());
-        type.setText(mParam1.getCategory());
-        admincomments.setText(mParam1.getAdmincomments());
-        status.setSelection(Integer.parseInt(mParam1.getStatus()));
-        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+        DatabaseReference instance=database.getReference(getString(R.string.instance));
+        localservices=instance.child("local-services");
+        view.findViewById(R.id.create).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(final View v) {
+            public void onClick(View v) {
+                if(!TextUtils.isEmpty(workerName.getText()))
+                {
+                    if(!TextUtils.isEmpty(workerNumber1.getText()))
+                    {
+                        if(!TextUtils.isEmpty(workerCategory.getText()))
+                        {
+                            localServices=new LocalServices(workerName.getText().toString(),workerNumber1.getText().toString(),workerNumber2.getText().toString(),workerCategory.getText().toString(),workerOfficeAddress.getText().toString());
+                            localservices.push().setValue(localServices).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Snackbar.make(view,"Added "+localServices.getWorkerName(),Snackbar.LENGTH_SHORT).show();
+                                    openFragment(DashboardFragment.newInstance("",""));
+                                }
+                            });
+                        }
+                        else {
+                            workerCategory.setError("Enter Service Type");
 
-                String key=mParam2.split("_-LILLIMOUNTAIN-_")[0];
-                String position=mParam2.split("_-LILLIMOUNTAIN-_")[1];
-                Complaint complaintx=new Complaint(admincomments.getText().toString(),type.getText().toString(),complainttext.getText().toString(),date.getText().toString(),mParam1.getResidentName(),stringList.get(status.getSelectedItemPosition()),title.getText().toString(),mParam1.getUid());
-                complaint.child(key).child(position).setValue(complaintx).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        final ComplaintListFragment complaintListFragment = new ComplaintListFragment();
-                        openFragment(complaintListFragment);
-                        Snackbar.make(v,"Complaint modified successfully",Snackbar.LENGTH_LONG).show();
+                        }
                     }
-                });
+                    else {
+                        workerNumber1.setError("Enter Worker Contact No.");
+                    }
+                }
+                else {
+                    workerName.setError("Enter Worker Name");
+
+                }
             }
         });
         return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(String uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
     }
 
     private void openFragment(final Fragment fragment)   {
@@ -137,13 +142,6 @@ public class ModifyComplaintFragment extends Fragment {
         transaction.commit();
 
     }
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(String uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);

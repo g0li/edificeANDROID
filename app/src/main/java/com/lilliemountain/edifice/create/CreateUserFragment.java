@@ -94,7 +94,7 @@ public class CreateUserFragment extends Fragment {
         }
     }
     Spinner salutation,housetype;
-    EditText name,flat,building,parkingslotno,carpetarea,vehiclemodel,emailid,mobileno,landline,password;
+    EditText name,flat,building,parkingslotno,carpetarea,vehiclemodel, email,mobileno,landline,password;
     RadioGroup parking,twfourwheeler;
     RadioButton yes,no,two,four;
     CheckBox gym,pool,club;
@@ -113,12 +113,12 @@ public class CreateUserFragment extends Fragment {
         salutation=view.findViewById(R.id.salutation);
         housetype=view.findViewById(R.id.housetype);
         name=view.findViewById(R.id.name);
-        flat=view.findViewById(R.id.email);
+        flat=view.findViewById(R.id.flat);
         building=view.findViewById(R.id.building);
         carpetarea=view.findViewById(R.id.carpetarea);
         parkingslotno=view.findViewById(R.id.parkingslotno);
         vehiclemodel=view.findViewById(R.id.vehiclemodelno);
-        emailid=view.findViewById(R.id.email);
+        email =view.findViewById(R.id.email);
         mobileno=view.findViewById(R.id.mobile);
         landline=view.findViewById(R.id.landline);
         twfourwheeler=view.findViewById(R.id.twofourwheeler);
@@ -201,7 +201,7 @@ public class CreateUserFragment extends Fragment {
                         else
                             user.setTwofourwheel("4");
 
-                        user.setEmailid(emailid.getText().toString());
+                        user.setEmailid(email.getText().toString());
                         user.setPassword(password.getText().toString());
                         user.setMobile(mobileno.getText().toString());
                         user.setLandline(landline.getText().toString());
@@ -222,7 +222,7 @@ public class CreateUserFragment extends Fragment {
                                 FirebaseDatabase database=FirebaseDatabase.getInstance();
                                 instance=database.getReference(getString(R.string.instance));
                                 users=instance.child("users");
-                                FirebaseUser firebaseUser = auth.getCurrentUser();
+                                FirebaseUser firebaseUser = task.getResult().getUser();
                                 users.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
@@ -262,7 +262,7 @@ public class CreateUserFragment extends Fragment {
                 vehiclemodel.setText(user.getVmodel());
                 two.setChecked(user.getTwofourwheel().contains("2"));
                 four.setChecked(user.getTwofourwheel().contains("4"));
-                emailid.setText(user.getEmailid());
+                email.setText(user.getEmailid());
                 mobileno.setText(user.getMobile());
                 landline.setText(user.getLandline());
                 password.setText(user.getPassword());
@@ -327,7 +327,7 @@ public class CreateUserFragment extends Fragment {
                         else
                             user.setTwofourwheel("4");
 
-                        user.setEmailid(emailid.getText().toString());
+                        user.setEmailid(email.getText().toString());
                         user.setPassword(password.getText().toString());
                         user.setMobile(mobileno.getText().toString());
                         user.setLandline(landline.getText().toString());

@@ -110,12 +110,20 @@ public class UserMaintenanceListFragment extends Fragment {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 list.clear();
                                 GenericTypeIndicator<List<Maintenance>> t=new GenericTypeIndicator<List<Maintenance>>() {};
-                                list.addAll(dataSnapshot.getValue(t));
-                                nextbill.setText("next bill is due "+list.get(list.size()-1).getHeader().getDate());
-                                amount.setText("₹"+list.get(list.size()-1).getTotalbill());
-                                userMLAdater=new UserMaintenanceListAdapter(list);
-                                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                                recyclerView.setAdapter(userMLAdater);
+                                try {
+                                    list.addAll(dataSnapshot.getValue(t));
+                                    nextbill.setText("next bill is due "+list.get(list.size()-1).getHeader().getDate());
+                                    amount.setText("₹"+list.get(list.size()-1).getTotalbill());
+                                    userMLAdater=new UserMaintenanceListAdapter(list);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    recyclerView.setAdapter(userMLAdater);
+                                } catch (Exception e) {
+                                    nextbill.setText("no due bills");
+                                    amount.setText("₹ 0.0");
+                                    userMLAdater=new UserMaintenanceListAdapter(list);
+                                    recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                                    recyclerView.setAdapter(userMLAdater);
+                                }
                             }
 
                             @Override

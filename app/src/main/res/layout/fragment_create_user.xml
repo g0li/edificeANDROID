@@ -83,11 +83,11 @@
                     android:text="Flat" />
 
                 <EditText
-                    android:id="@+id/email"
+                    android:id="@+id/flat"
                     style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
                     android:layout_width="match_parent"
+
                     android:layout_height="wrap_content"
-                    
                     android:ems="10"
                     android:inputType="textPersonName" />
             </LinearLayout>
@@ -293,10 +293,11 @@
                     android:text="2/4 Wheeler" />
 
                 <RadioGroup
+                    android:id="@+id/twfourwheeler"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/twfourwheeler"
+                    android:checkedButton="@id/two"
                     android:orientation="horizontal">
 
                     <RadioButton

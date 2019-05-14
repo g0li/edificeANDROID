@@ -157,7 +157,7 @@ public class ResidentListFragment extends Fragment implements UserAdapter.UsersA
             final UserAdapter userAdapter=new UserAdapter(list,ResidentListFragment.this,ResidentListFragment.this);
             recyclerView.setAdapter(userAdapter);
             progressBar2.setVisibility(View.GONE);
-            SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+            SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
             searchView.setSearchableInfo(searchManager
                     .getSearchableInfo(getActivity().getComponentName()));
             searchView.setMaxWidth(Integer.MAX_VALUE);

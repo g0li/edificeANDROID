@@ -117,25 +117,27 @@ public class ComplaintListFragment extends Fragment implements ComplaintsAdapter
                 KeyList.clear();
                 for (DataSnapshot child :
                         dataSnapshot.getChildren()) {
-                    KeyList.add(child.getKey());
+                    GenericTypeIndicator<List<Complaint>> t=new GenericTypeIndicator<List<Complaint>>() {};
+                    list.addAll(child.getValue(t));
+                    for (int i = 0; i < list.size(); i++) {
+                        KeyList.add(child.getKey()+"_-LILLIMOUNTAIN-_"+i);
+                    }
                 }
-
-                for (String key:
-                        KeyList) {
-                    DatabaseReference keyRef=complaint.child(key);
-                    keyRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            Complaint complaint=dataSnapshot.getValue(Complaint.class);
-                            list.add(complaint);
-
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.e("Error at line 148", databaseError.toString());
-                        }
-                    });
-                }
+//
+//                for (String key:
+//                        KeyList) {
+//                    DatabaseReference keyRef=complaint.child(key);
+//                    keyRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//
+//                        }
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            Log.e("Error at line 148", databaseError.toString());
+//                        }
+//                    });
+//                }
 
                 final ComplaintsAdapter complaintsAdapter=new ComplaintsAdapter(list,ComplaintListFragment.this,ComplaintListFragment.this);
                 recyclerView.setAdapter(complaintsAdapter);

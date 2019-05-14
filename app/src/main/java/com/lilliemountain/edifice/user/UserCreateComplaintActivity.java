@@ -1,6 +1,7 @@
 package com.lilliemountain.edifice.user;
 
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -89,7 +90,10 @@ public class UserCreateComplaintActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 GenericTypeIndicator<List<Complaint>> t=new GenericTypeIndicator<List<Complaint>>() {};
                  complaintList=new ArrayList<>();
-                complaintList.addAll(dataSnapshot.getValue(t));
+                try {
+                    complaintList.addAll(dataSnapshot.getValue(t));
+                } catch (Exception e) {
+                }
             }
 
             @Override

@@ -84,6 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                                             @Override
                                             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                                                spin_kit.setVisibility(View.GONE);
+                                                findViewById(R.id.emailSignInButton).setClickable(true);
                                             }
                                         });
                                     }
@@ -93,6 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.makeText(LoginActivity.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();
 
+                                    spin_kit.setVisibility(View.GONE);
+                                    findViewById(R.id.emailSignInButton).setClickable(true);
                                 }
 
                                 // ...

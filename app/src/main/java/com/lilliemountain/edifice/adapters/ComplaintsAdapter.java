@@ -130,6 +130,7 @@ public class ComplaintsAdapter extends RecyclerView.Adapter<ComplaintsAdapter.Us
         date.setText(complaints.getDate());
         type.setText(complaints.getCategory());
         admincomments.setText(complaints.getAdmincomments());
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
         }
     }

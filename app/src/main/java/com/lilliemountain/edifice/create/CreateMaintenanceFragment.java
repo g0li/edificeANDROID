@@ -106,7 +106,7 @@ public class CreateMaintenanceFragment extends Fragment {
     List<String> particularsListStr=new ArrayList<>();
     ArrayAdapter<String> namesAA,billsAA,particularAA;
     DatabaseReference instance,maintenance,users,particularz,bill4;
-    Integer carpetareax=0;
+    Integer carpetareax=1;
     long subTotal=0;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -155,6 +155,8 @@ public class CreateMaintenanceFragment extends Fragment {
         users.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                namesOfResidents.add("Bulk");
+
                 for (DataSnapshot child :
                         dataSnapshot.getChildren()) {
                     Users u=child.getValue(Users.class);
@@ -167,11 +169,17 @@ public class CreateMaintenanceFragment extends Fragment {
                 resident.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        flat.setText("Flat:\n"+namesOfResidentsUsers.get(position).getFlat());
-                        housetype.setText("House Type:\n"+namesOfResidentsUsers.get(position).getHousetype());
-                        carpetarea.setText("Carpet Area:\n"+namesOfResidentsUsers.get(position).getCarpetarea()+"sq.ft.");
-                        carpetareax=namesOfResidentsUsers.get(position).getCarpetarea();
-                        building.setText("Building:\n"+namesOfResidentsUsers.get(position).getBuilding());
+                        if(namesAA.getItem(resident.getSelectedItemPosition()).equals("Bulk"))
+                        {
+
+                        }
+                        else {
+                            flat.setText("Flat:\n"+namesOfResidentsUsers.get(position-1).getFlat());
+                            housetype.setText("House Type:\n"+namesOfResidentsUsers.get(position-1).getHousetype());
+                            carpetarea.setText("Carpet Area:\n"+namesOfResidentsUsers.get(position-1).getCarpetarea()+"sq.ft.");
+                            carpetareax=namesOfResidentsUsers.get(position-1).getCarpetarea();
+                            building.setText("Building:\n"+namesOfResidentsUsers.get(position-1).getBuilding());
+                        }
                     }
 
                     @Override
@@ -184,7 +192,7 @@ public class CreateMaintenanceFragment extends Fragment {
                         GenericTypeIndicator<List<Particulars>> t = new GenericTypeIndicator<List<Particulars>>() {};
                         particularsList = dataSnapshot.getValue(t);
                         for (Particulars particular:
-                             particularsList) {
+                                particularsList) {
                             particularsListStr.add(particular.getName());
                         }
                         particularAA=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,particularsListStr);
@@ -192,7 +200,7 @@ public class CreateMaintenanceFragment extends Fragment {
                         particulars.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                             @Override
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                int Amount= Integer.parseInt(String.valueOf(particularsList.get(position).getBaseprice()*carpetareax));
+                                int Amount= Integer.parseInt(String.valueOf(particularsList.get(position).getBaseprice()));
                                 pamount.setText(Amount+"");
                             }
 
@@ -211,14 +219,17 @@ public class CreateMaintenanceFragment extends Fragment {
                                 view.findViewById(R.id.floatingActionButton).setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
-                                        mbalist.add(new Bill(Integer.parseInt(String.valueOf(particularsList.get(particulars.getSelectedItemPosition()).getBaseprice()*carpetareax)),
+                                        mbalist.add(new Bill(Integer.parseInt(String.valueOf(particularsList.get(particulars.getSelectedItemPosition()).getBaseprice())),
                                                 particularsList.get(particulars.getSelectedItemPosition()).getName()));
                                         MaintenanceBillAdapter maintenanceBillAdapter=new MaintenanceBillAdapter(mbalist);
                                         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                                         recyclerView.setAdapter(maintenanceBillAdapter);
-                                        subTotal=subTotal+particularsList.get(particulars.getSelectedItemPosition()).getBaseprice()*carpetareax;
-                                        subtotal.setText(subTotal+"");
-                                        totalbill.setText(subTotal+"");
+                                        if(!namesAA.getItem(resident.getSelectedItemPosition()).equals("Bulk")){
+
+                                            subTotal=subTotal+particularsList.get(particulars.getSelectedItemPosition()).getBaseprice()*carpetareax;
+                                            subtotal.setText(subTotal+"");
+                                            totalbill.setText(subTotal+"");
+                                        }
                                     }
                                 });
                             }
@@ -243,42 +254,46 @@ public class CreateMaintenanceFragment extends Fragment {
                 Log.e( "Error at line 170: ",databaseError.toString() );
             }
         });
-        final List<Maintenance> listyu=new ArrayList<>();
         view.findViewById(R.id.submit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Header header=new Header();
-                Maintenance _maintenance=new Maintenance();
-                Users users=namesOfResidentsUsers.get(resident.getSelectedItemPosition());
+                if(namesAA.getItem(resident.getSelectedItemPosition()).equals("Bulk"))
+                {
+                    for (int i = 0; i < namesOfResidentsUsers.size(); i++) {
 
-                header=new Header(billForList.get(billfor.getSelectedItemPosition()), users.getBuilding(),users.getCarpetarea(),dateStr,users.getFlat(),users.getFlat(),users.getName(),users.getMobile());
-                _maintenance=new Maintenance(mbalist,header,header.getBillfor()+dateStr.split("-")[2],0,0,"Created",subTotal,subTotal);
-                maintenance.child(namesOfResidentsKey.get(resident.getSelectedItemPosition())).addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        Header header=new Header();
+                        Maintenance _maintenance=new Maintenance();
+                        subTotal=0;
+                        Users users=namesOfResidentsUsers.get(i);
+                        carpetareax=users.getCarpetarea();
+                        subTotal=subTotal+particularsList.get(particulars.getSelectedItemPosition()).getBaseprice()*carpetareax;
+                        header=new Header(billForList.get(billfor.getSelectedItemPosition()), users.getBuilding(),users.getCarpetarea(),dateStr,users.getFlat(),users.getFlat(),users.getName(),users.getMobile());
+                        _maintenance=new Maintenance(mbalist,header,header.getBillfor()+dateStr.split("-")[2],0,0,"Created",subTotal,subTotal);
 
-                        GenericTypeIndicator<List<Maintenance>> t = new GenericTypeIndicator<List<Maintenance>>() {};
-                        try {
-                            listyu.addAll(dataSnapshot.getValue(t));
-                        } catch (Exception e) {
+                        maintenance.child(namesOfResidentsKey.get(i)).push().setValue(_maintenance).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                            }
+                        });
+                    }
+                    Toast.makeText(getContext(),"Bulk Maintenance created",Toast.LENGTH_LONG).show();
+                    openFragment(CreateMaintenanceFragment.newInstance("",""));
+                }
+                else {
+
+                    Header header=new Header();
+                    Maintenance _maintenance=new Maintenance();
+                    Users users=namesOfResidentsUsers.get(resident.getSelectedItemPosition()-1);
+                    header=new Header(billForList.get(billfor.getSelectedItemPosition()), users.getBuilding(),users.getCarpetarea(),dateStr,users.getFlat(),users.getFlat(),users.getName(),users.getMobile());
+                    _maintenance=new Maintenance(mbalist,header,header.getBillfor()+dateStr.split("-")[2],0,0,"Created",subTotal,subTotal);
+
+                    maintenance.child(namesOfResidentsKey.get(resident.getSelectedItemPosition()-1)).push().setValue(_maintenance).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getContext(),"Maintenance created",Toast.LENGTH_LONG).show();
                         }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-                listyu.add(_maintenance);
-
-                maintenance.child(namesOfResidentsKey.get(resident.getSelectedItemPosition())).setValue(listyu).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        Toast.makeText(getContext(),"Maintenance created",Toast.LENGTH_LONG).show();
-                        openFragment(CreateMaintenanceFragment.newInstance("",""));
-
-                    }
-                });
+                    });
+                }
             }
         });
         return view;

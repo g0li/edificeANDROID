@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_star"
         android:title="@string/title_events" />
 
+    <item
+        android:id="@+id/navigation_local_services"
+        android:icon="@drawable/ic_local_services"
+        android:title="@string/title_local_services" />
+
 </menu>

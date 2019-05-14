@@ -46,7 +46,7 @@ import java.util.List;
  * Use the {@link UserEventsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserEventsFragment extends Fragment implements UserEventsAdapter.OnGoingListener{
+public class UserEventsFragment extends Fragment implements UserEventsAdapter.OnUserEventListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -93,6 +93,7 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
     FirebaseDatabase database;
     DatabaseReference instance,eventsRef,keyRef,users,userUID;
     List<Events> eventsList=new ArrayList<>();
+    List<Events> eventsList2=new ArrayList<>();
     Calendar calendar;
     List<String> eventsKeyList=new ArrayList<>();
     @Override
@@ -112,8 +113,11 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
                 for (DataSnapshot child :
                         dataSnapshot.getChildren()) {
                     Events events=child.getValue(Events.class);
-                    eventsList.add(events);
-                    eventsKeyList.add(child.getKey());
+                    if(events.getStatus().equals("Created")){
+                        eventsList.add(events);
+                        eventsKeyList.add(child.getKey());
+                    }
+                    Log.e("onDataChange: ", String.valueOf(dataSnapshot.getChildrenCount()));
                 }
                 uEA=new UserEventsAdapter(eventsList,UserEventsFragment.this);
                 events.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -127,7 +131,6 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
 
             }
         });
-        DatePicker datePicker;
         view.findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,9 +148,6 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
                     @Override
                     public void onClick(View v) {
                         calendar = Calendar.getInstance();
-                        int year = calendar.get(Calendar.YEAR);
-                        int month = calendar.get(Calendar.MONTH);
-                        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
                         DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -177,7 +177,7 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Users person=dataSnapshot.getValue(Users.class);
-                        evnts=new Events(person.getName(),"0","0",person.getFlat(),"-",person.getBuilding(),dateView.getText().toString(),person.getEmailid(),new ArrayList<String>());
+                        evnts=new Events(person.getName(),"0","0",person.getFlat(),"-",person.getBuilding(),dateView.getText().toString(),person.getEmailid(),new ArrayList<String>(),"Created");
                     }
 
                     @Override
@@ -303,6 +303,22 @@ public class UserEventsFragment extends Fragment implements UserEventsAdapter.On
             });
         }
     }
+
+    @Override
+    public void onStatusChanged(final String b, final int i) {
+        Log.e("onStatusChanged: ", String.valueOf(b));
+        Events events=eventsList.get(i);
+            events.setStatus(b);
+            String key=eventsKeyList.get(i);
+            keyRef=eventsRef.child(key);
+            keyRef.setValue(events).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    Toast.makeText(getContext(), "Status Changed!", Toast.LENGTH_SHORT).show();
+                }
+            });
+}
+
     int scrolltoPosition=0;
     /**
      * This interface must be implemented by activities that contain this

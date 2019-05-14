@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
@@ -35,11 +36,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.lilliemountain.edifice.POJO.Committee;
 import com.lilliemountain.edifice.POJO.Users;
+import com.lilliemountain.edifice.create.CreateLocalService;
 import com.lilliemountain.edifice.create.CreateMaintenanceFragment;
 import com.lilliemountain.edifice.create.CreateNoticeFragment;
 import com.lilliemountain.edifice.create.CreateUserFragment;
+import com.lilliemountain.edifice.create.ModifyComplaintFragment;
 import com.lilliemountain.edifice.list.CommitteeListFragment;
 import com.lilliemountain.edifice.list.ComplaintListFragment;
+import com.lilliemountain.edifice.list.LocalServicesListFragment;
 import com.lilliemountain.edifice.list.MaintenanceListFragment;
 import com.lilliemountain.edifice.list.NoticeListFragment;
 import com.lilliemountain.edifice.list.ResidentListFragment;
@@ -57,7 +61,11 @@ public class DashboardActivity extends AppCompatActivity
         MaintenanceListFragment.OnFragmentInteractionListener,
         CreateMaintenanceFragment.OnFragmentInteractionListener,
         ComplaintListFragment.OnFragmentInteractionListener,
-        CommitteeListFragment.OnFragmentInteractionListener{
+        CommitteeListFragment.OnFragmentInteractionListener,
+        ModifyComplaintFragment.OnFragmentInteractionListener,
+        DashboardFragment.OnFragmentInteractionListener,
+        LocalServicesListFragment.OnFragmentInteractionListener,
+        CreateLocalService.OnFragmentInteractionListener{
     FloatingActionButton fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +84,7 @@ public class DashboardActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-        residentFragment();
+        dashboardFragment();
         String email= FirebaseAuth.getInstance().getCurrentUser().getEmail();
         getSupportActionBar().setSubtitle("e:"+email);
     }
@@ -131,7 +139,7 @@ public class DashboardActivity extends AppCompatActivity
         getSupportActionBar().setTitle("Complaint File");
         final ComplaintListFragment complaintListFragment = new ComplaintListFragment();
         openFragment(complaintListFragment);
-        fab.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.GONE);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -155,6 +163,31 @@ public class DashboardActivity extends AppCompatActivity
             }
         });
 
+    }
+
+    void dashboardFragment()
+    {
+        getSupportActionBar().setTitle("Edifice Dashboard");
+        final DashboardFragment dashboardFragment = new DashboardFragment();
+        openFragment(dashboardFragment);
+        fab.setVisibility(View.GONE);
+        fab.setOnClickListener(null);
+    }
+
+
+    public void localServicesFragment()
+    {
+        getSupportActionBar().setTitle("Local Services");
+        final LocalServicesListFragment localServicesListFragment = new LocalServicesListFragment();
+        openFragment(localServicesListFragment);
+        fab.setVisibility(View.VISIBLE);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+             openFragment(CreateLocalService.newInstance("create",""));
+
+            }
+        });
     }
 
     Users users1;
@@ -266,10 +299,10 @@ public class DashboardActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frame, fragment,fragment.getClass().getSimpleName());
+        fab.setContentDescription(fragment.getClass().getSimpleName());
         transaction.addToBackStack(null);
         transaction.commit();
         fab.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -284,20 +317,24 @@ public class DashboardActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-
-            Intent a = new Intent(Intent.ACTION_MAIN);
-            a.addCategory(Intent.CATEGORY_HOME);
-            a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(a);
+            Fragment f = getSupportFragmentManager().findFragmentById(R.id.frame);
+            if(f instanceof DashboardFragment)
+            {
+                Intent a = new Intent(Intent.ACTION_MAIN);
+                a.addCategory(Intent.CATEGORY_HOME);
+                a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(a);
+            }
+            else
+            {
+                dashboardFragment();
+            }
         }
     }
 
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
 
@@ -320,6 +357,8 @@ public class DashboardActivity extends AppCompatActivity
             complaintFragment();
         }else if (id == R.id.nav_committee) {
             committeeFragment();
+        }else if (id == R.id.nav_local_services) {
+            localServicesFragment();
         } else if (id == R.id.nav_log_out) {
             FirebaseAuth.getInstance().signOut();
             startActivity(new Intent(DashboardActivity.this,LoginActivity.class));
@@ -346,7 +385,7 @@ public class DashboardActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
-                        "mailto","iprogramyourapp@gmail.com", null));
+                        "mailto","roshan@lilliemountain.com", null));
                 emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Email from Edifice");
                 startActivity(Intent.createChooser(emailIntent, "Send email..."));
             }
@@ -357,6 +396,7 @@ public class DashboardActivity extends AppCompatActivity
                 openWhatsApp();
             }
         });
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         dialog.show();
     }
     private void openWhatsApp() {
@@ -364,7 +404,7 @@ public class DashboardActivity extends AppCompatActivity
         Intent i = new Intent(Intent.ACTION_VIEW);
 
         try {
-            String url = "https://api.whatsapp.com/send?phone=+918169777677&text=Hello lilliemountain";
+            String url = "https://api.whatsapp.com/send?phone=+918169919851&text=Hello lilliemountain";
             i.setPackage("com.whatsapp");
             i.setData(Uri.parse(url));
             if (i.resolveActivity(packageManager) != null) {
