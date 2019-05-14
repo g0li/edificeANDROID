@@ -137,7 +137,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder>  i
         mobileno=dialog.findViewById(R.id.mobile);
         landline=dialog.findViewById(R.id.landline);
 
-        ImageView close=dialog.findViewById(R.id.close);
+        ImageView close=dialog.findViewById(R.id.delete);
         TextView username=dialog.findViewById(R.id.username);
 
         name.setText(users.getName());

@@ -139,7 +139,7 @@ public class CommitteeAdapter extends RecyclerView.Adapter<CommitteeAdapter.User
         role.setAdapter(aa);
         role.setSelection(tempLst.indexOf(complaints.getRole()));
         dialog.show();
-        dialog.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();

@@ -102,6 +102,9 @@ public class ProfileActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                 return true;
+            case R.id.tenant:
+                startActivity(new Intent(ProfileActivity.this, TenantManagementActivity.class));
+                return true;
             case R.id.developer:
                 String url = "https://www.lilliemountain.com/";
                 Intent i = new Intent(Intent.ACTION_VIEW);

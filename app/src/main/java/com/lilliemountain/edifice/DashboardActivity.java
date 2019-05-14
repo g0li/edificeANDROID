@@ -238,10 +238,12 @@ public class DashboardActivity extends AppCompatActivity
                     CnamelistyStr.add(u.getName());
                 }
                 for (int i = 0; i < namelistyStr.size(); i++) {
-                    if(namelistyStr.get(i).toLowerCase().equals(CnamelistyStr.get(i).toLowerCase()))
-                    {
-                        namelistyStr.remove(i);
-                        namelisty.remove(i);
+                    if (CnamelistyStr.size()>i) {
+                        if(namelistyStr.get(i).toLowerCase().equals(CnamelistyStr.get(i).toLowerCase()))
+                        {
+                            namelistyStr.remove(i);
+                            namelisty.remove(i);
+                        }
                     }
                 }
                 ArrayAdapter<String> namelistyStringArrayAdapter=new ArrayAdapter<>(DashboardActivity.this,android.R.layout.simple_list_item_1,namelistyStr);
@@ -275,7 +277,8 @@ public class DashboardActivity extends AppCompatActivity
         ArrayAdapter<String> aa=new ArrayAdapter<>(view.getContext(),android.R.layout.simple_list_item_1,tempLst);
         role.setAdapter(aa);
         dialog.show();
-        dialog.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();

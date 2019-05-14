@@ -37,4 +37,5 @@ dependencies {
     implementation 'com.paykun.sdk:paykun-checkout-lib:1.0.8'
     implementation 'com.github.ybq:Android-SpinKit:1.2.0'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.1'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

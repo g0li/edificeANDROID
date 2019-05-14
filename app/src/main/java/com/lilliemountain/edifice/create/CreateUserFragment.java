@@ -3,6 +3,7 @@ package com.lilliemountain.edifice.create;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -145,6 +146,8 @@ public class CreateUserFragment extends Fragment {
                 view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                if (!email.getText().toString().isEmpty()) {
+                    if(!password.getText().toString().isEmpty()){
                         progressBar3.setVisibility(View.VISIBLE);
                         user.setName(name.getText().toString());
                         user.setFlat(flat.getText().toString());
@@ -215,35 +218,39 @@ public class CreateUserFragment extends Fragment {
                         /************************************************/
                         /*************/
                         final FirebaseAuth auth= FirebaseAuth.getInstance();
-
-                        auth.createUserWithEmailAndPassword(user.getEmailid(),user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                FirebaseDatabase database=FirebaseDatabase.getInstance();
-                                instance=database.getReference(getString(R.string.instance));
-                                users=instance.child("users");
-                                FirebaseUser firebaseUser = task.getResult().getUser();
-                                users.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                auth.createUserWithEmailAndPassword(user.getEmailid(),user.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        progressBar3.setVisibility(View.GONE);
-                                        auth.signOut();
-                                        auth.signInWithEmailAndPassword(getString(R.string.admin_email),getString(R.string.admin_password))
-                                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                                    @Override
-                                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                                        Toast.makeText(getContext(), user.getName()+" added.", Toast.LENGTH_SHORT).show();
-                                                        openFragment(ResidentListFragment.newInstance("",""));
-                                                    }
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        FirebaseDatabase database=FirebaseDatabase.getInstance();
+                                        instance=database.getReference(getString(R.string.instance));
+                                        users=instance.child("users");
+                                        FirebaseUser firebaseUser = task.getResult().getUser();
+                                        users.child(firebaseUser.getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                progressBar3.setVisibility(View.GONE);
+                                                auth.signOut();
+                                                auth.signInWithEmailAndPassword(getString(R.string.admin_email),getString(R.string.admin_password))
+                                                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                                                Toast.makeText(getContext(), user.getName()+" added.", Toast.LENGTH_SHORT).show();
+                                                                openFragment(ResidentListFragment.newInstance("",""));
+                                                            }
 
-                                                });
+                                                        });
+                                            }
+                                        });
                                     }
                                 });
                             }
-                        });
-
+                            else {
+                                Snackbar.make(v,"Enter All Details Completely",Snackbar.LENGTH_LONG).show();
+                            }
+                        }
                     }
                 });
+
                 break;
             case "modify":
                 name.setText(user.getName());

@@ -134,7 +134,7 @@ public class CommitteeListFragment extends Fragment implements CommitteeAdapter.
                 final CommitteeAdapter complaintsAdapter=new CommitteeAdapter(list,CommitteeListFragment.this);
                 recyclerView.setAdapter(complaintsAdapter);
                 progressBar2.setVisibility(View.GONE);
-                SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+                SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
                 searchView.setSearchableInfo(searchManager
                         .getSearchableInfo(getActivity().getComponentName()));
                 searchView.setMaxWidth(Integer.MAX_VALUE);
@@ -281,7 +281,7 @@ public class CommitteeListFragment extends Fragment implements CommitteeAdapter.
         ArrayAdapter<String> aa=new ArrayAdapter<>(view.getContext(),android.R.layout.simple_spinner_item,tempLst);
         role.setAdapter(aa);
         dialog.show();
-        dialog.findViewById(R.id.close).setOnClickListener(new View.OnClickListener() {
+        dialog.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();

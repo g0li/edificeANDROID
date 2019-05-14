@@ -6,7 +6,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -123,7 +122,7 @@ public class NoticeAdapter extends RecyclerView.Adapter<NoticeAdapter.NoticeHold
         daydate=dialog.findViewById(R.id.daydate);
         type=dialog.findViewById(R.id.type);
 
-        ImageView close=dialog.findViewById(R.id.close);
+        ImageView close=dialog.findViewById(R.id.delete);
 
         title.setText(notices.getNoticeTitle());
         desc.setText(notices.getNoticeText());

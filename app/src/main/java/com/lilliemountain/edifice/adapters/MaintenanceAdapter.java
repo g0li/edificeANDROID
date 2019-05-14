@@ -120,7 +120,7 @@ public class MaintenanceAdapter extends RecyclerView.Adapter<MaintenanceAdapter.
         pending=dialog.findViewById(R.id.pending);
         interestfine=dialog.findViewById(R.id.interestfine);
         recyclerView=dialog.findViewById(R.id.recitem);
-        ImageView close=dialog.findViewById(R.id.close);
+        ImageView close=dialog.findViewById(R.id.delete);
         
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
         MaintenanceBillAdapter maintenanceBillAdapter=new MaintenanceBillAdapter(bills);
